@@ -40,4 +40,15 @@ describe "Product", type: :request do
       expect(json[:data][:price]).to eq(["is invalid", "is not a number"])
     end
   end
+
+  context "Delete product" do
+    let!(:product) { Product.create(title: "Bola", description: "Quadrada", image_url: "someurl", price: 20.40) }
+    it "delete a product" do
+      headers = {"ACCEPT" => "application/json"}
+      delete "/api/v1/products/#{product.id}", headers: headers
+
+      expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end

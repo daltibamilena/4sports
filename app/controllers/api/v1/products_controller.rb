@@ -26,6 +26,12 @@ module Api
         end
       end
 
+      def destroy
+        product = Product.find(params[:id])
+        product.destroy
+        render json: {status: "SUCCESS", message: "Deleted product", data: product}, status: :ok
+      end
+
       private
 
       def product_params
