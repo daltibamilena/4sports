@@ -1,0 +1,16 @@
+<div id="search_results"> 
+  <div class="container mt-5">
+    <div class="row">
+      <% @products.each do |product| %>
+          <div class="col-md-4">
+              <div class="card p-3">
+                  <div class="d-flex flex-row mb-3"><img src="<%= product.image_url  %> " width="70">
+                      <div class="d-flex flex-column ml-2"><span><%= product.title%></span><span class="text-black-50"><%= product.price%></span><span class="ratings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></div>
+                  </div>
+                  <h6><%= product.description%></h6>
+              </div>
+          </div>
+      <% end %>
+      </div>
+  </div>
+</div>
