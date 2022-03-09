@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
       @users = User.all
       respond_to do |format|
         format.html { render template: "dashboard/index", locals: {products: @products, users: @users} }
+        format.json { render json: products, status: :ok }
       end
     else
       redirect_to products_url
@@ -18,8 +19,10 @@ class DashboardController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to dashboard_url, notice: "User was successfully updated." }
+        format.json { render json: user, status: :ok }
       else
         format.html { redirect_to dashboard_url, notice: "User can not be updated." }
+        format.json { render json: user, status: :unprocessable_entity }
       end
     end
   end

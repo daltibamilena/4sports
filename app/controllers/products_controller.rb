@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :search]
+  before_action :require_admin, except: [:index, :search]
 
   def index
     @products = Product.order("created_at DESC")
@@ -13,8 +14,9 @@ class ProductsController < ApplicationController
     @products = Product.find_by_title(params[:title_search]).order("title #{params[:sort]}")
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update("search_results", partial: "partials/search_product", locals: {products: @products})
+        render turbo_stream: turbo_stream.update("search_results", partial: "partials/card_product", locals: {products: @products})
       end
+      format.json { render json: @products, status: :ok }
     end
   end
 
@@ -27,8 +29,10 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if product.save
         format.html { redirect_to dashboard_url, notice: "Product was successfully created." }
+        format.json { render json: product, status: :ok }
       else
         format.html { render :edit, locals: {product: @product} }
+        format.json { render json: product, status: :unprocessable_entity }
       end
     end
   end
@@ -38,13 +42,14 @@ class ProductsController < ApplicationController
   end
 
   def update
-    p params
     product = Product.find(params[:id])
     respond_to do |format|
       if product.update(product_params)
         format.html { redirect_to dashboard_url, notice: "Product was successfully updated." }
+        format.json { render json: product, status: :ok }
       else
         format.html { render :edit, locals: {product: @product} }
+        format.json { render json: product, status: :unprocessable_entity }
       end
     end
   end
@@ -54,9 +59,19 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if product.destroy
         format.html { redirect_to dashboard_url, notice: "Product was successfully deleted." }
+        format.json { render json: product, status: :ok }
       else
         format.html { redirect_to dashboard_url, notice: "Product can not be deleted." }
+        format.json { render json: product, status: :unprocessable_entity }
       end
+    end
+  end
+
+    def authenticate_user!
+    if user_signed_in?
+      @user = current_user
+    else
+      head :unauthorized
     end
   end
 
