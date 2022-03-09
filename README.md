@@ -20,6 +20,7 @@ Run seeds (important to generate user with admin role):
 ``` docker-compose run web rails db:seed ```
 
 By default the application is running on port :3000
+
 Admin default login:
 
 ```email: admin@example.com  password: 123456```
