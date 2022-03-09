@@ -1,7 +1,7 @@
 # 4sports
 
-## Instalation
-We are using docker, so you`ll need docker and docker-compose.
+## Installation
+We are using docker, so you will need docker and docker-compose.
 
 After clonning the repository, run
 
@@ -10,7 +10,7 @@ After clonning the repository, run
 So after all you can run:
 ``` docker-compose up -d```
 
-Then you`ll need to create database:
+Then you will need to create database:
 ``` docker-compose run web rails db:create ```
 
 Run the migrations: 
@@ -19,7 +19,7 @@ Run the migrations:
 Run seeds (important to generate user with admin role):
 ``` docker-compose run web rails db:seed ```
 
-By default the application is running on port :3000
+By default the application is running on [port :3000](http://localhost:3000/)
 
 Admin default login:
 
