@@ -1,25 +1,22 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # 4sports
+
+## Instalation
+We are using docker, so you`ll need docker and docker-compose.
+
+After clonning the repository, run
+
+``` docker-compose build ```
+
+So after all you can run:
+``` docker-compose up -d```
+
+Then you`ll need to create database:
+``` docker-compose run web rails db:create ```
+
+Run the migrations: 
+``` docker-compose run web rails db:migrate ```
+
+Run seeds (important to generate user with admin role):
+``` docker-compose run web rails db:seed ```
+
+By default the application is running on port :3000
