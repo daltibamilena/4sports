@@ -1,0 +1,68 @@
+<%= render partial: 'partials/flash_message',  locals: {flash: flash} %>
+
+<div class="card bg-light">
+  <div class="card-header ">
+  <div class="d-flex align-items-center">
+      <h4 class="mx-auto w-100">Products</h4>
+      <%= button_to "new",{:controller => :products, :action => 'new' },  :method => :get, :class => 'btn btn-success ml-auto' %>
+    </div>
+  </div>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.title %></td>
+            <td><%= number_to_currency(product.price, unit: "R$", separator: ",", delimiter: "") %></td>
+            <td class="btn-group">
+              <%= button_to "delete", {:controller => :products, :action => 'destroy', :id => product.id, }, :method => :delete, :class => 'btn btn-sm btn-danger' %>
+              <%= button_to "edit", {:controller => :products,:action => 'edit', :id => product.id }, :method => :get, :class => 'btn btn-sm btn-info', :style => 'margin-left: 0.5em' %>
+            </td>    
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+<div class="card bg-light">
+  <div class="card-header ">
+    <div class="d-flex align-items-center">
+       <h4 class="mx-auto w-100">User</h4>
+     </div>
+  </div>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>IsAdmin?</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.admin %></td>
+          <td class="btn-group">            
+            <%= form_with url: set_user_admin_path(:id => user.id) ,method: :put, class:"form-inline margin_space_top" do |form| %>
+              <div class="input-group">
+                <div class="btn-toolbar" style="padding-left: 15px">
+                <%= form.submit 'true', name: "admin",  class:"btn btn-dark margin_space" %>
+                <%= form.submit 'false', name: "admin",  class:"btn btn-dark margin_space" %>
+                </div>
+              </div>
+            <% end %>
+          </td> 
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
