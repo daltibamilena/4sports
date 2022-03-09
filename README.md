@@ -28,4 +28,4 @@ Admin default login:
 ## Tests
 
 To run tests: 
-``` docker -compose run web bundle exec rspec spec ``` 
+``` docker-compose run web bundle exec rspec spec ``` 
