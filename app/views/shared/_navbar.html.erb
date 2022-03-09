@@ -1,10 +1,25 @@
 <!-- Image and text -->
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="/">
-    <img src="https://unsplash.com/photos/cUkKHPvHIjI" width="30" height="30" class="d-inline-block align-top" alt="">
-    4Sports
-  </a>
-  <button class="btn btn-info">
-    <a href="/users/sign_in"> Login</a>
-  </button>
-</nav>
+
+  <nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="https://unsplash.com/photos/cUkKHPvHIjI" width="30" height="30" class="d-inline-block align-top" alt="">
+      4Sports
+    </a>
+<div class="btn-toolbar" style="padding-left: 15px">
+      <% if !current_user %>
+        <button class="btn btn-info">
+          <a href="/users/sign_in"> Login</a>
+        </button>
+      <% else %>
+          <% if current_user.admin? %>
+      <button class="btn btn-info">
+        <a href="/dashboard"> dashboard</a>
+      </button>
+
+      <% end%>
+          <%= button_to "logout", destroy_user_session_path, :method => :delete, :class => 'btn btn-warning', :style => 'margin-left: 0.5em'  %>
+      <% end %>    
+</div>
+    </div>
+  </nav>
