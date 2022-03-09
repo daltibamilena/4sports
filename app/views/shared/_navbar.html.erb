@@ -1,0 +1,22 @@
+<!-- Image and text -->
+
+  <nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">     
+      4Sports
+    </a>
+<div class="btn-toolbar" style="padding-left: 15px">
+      <% if !current_user %>
+        <button class="btn btn-info">
+          <a href="/users/sign_in"> Login</a>
+        </button>
+      <% else %>
+          <% if current_user.admin? %>
+              <%= button_to "dashboard", dashboard_path, :method => :get, :class => 'btn btn-info'  %>
+
+      <% end%>
+          <%= button_to "logout", destroy_user_session_path, :method => :delete, :class => 'btn btn-warning', :style => 'margin-left: 0.5em'  %>
+      <% end %>    
+</div>
+    </div>
+  </nav>

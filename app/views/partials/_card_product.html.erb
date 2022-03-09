@@ -1,0 +1,19 @@
+<div id="search_results"> 
+  <div class="container mt-5">
+    <div class="row" style="row-gap: 1em">
+      <% @products.each do |product| %>
+          <div class="col-md-4 ">
+            <div class="card p-3 h-100">
+              <div class="d-flex flex-row mb-3" ><img src="<%= product.image_url  %> " width="200">
+                <div class="d-flex flex-column ml-2" style="margin-left: 0.5em">
+                  <span><%= product.title %></span>
+                  <span class="badge alert-warning"><%= number_to_currency(product.price, unit: "R$", separator: ",", delimiter: "")%></span>
+                  <span><%= product.description %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
