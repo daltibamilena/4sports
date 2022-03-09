@@ -8,6 +8,7 @@
                 <div class="d-flex flex-column ml-2" style="margin-left: 0.5em">
                   <span><%= product.title %></span>
                   <span class="badge alert-warning"><%= number_to_currency(product.price, unit: "R$", separator: ",", delimiter: "")%></span>
+                  <span><%= product.description %></span>
                 </div>
               </div>
             </div>

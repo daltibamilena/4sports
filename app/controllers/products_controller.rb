@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.find_by_title(params[:title_search]).order("title #{params[:sort]}")
+    @products = Product.find_product(params[:title_search]).order("title #{params[:sort]}")
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.update("search_results", partial: "partials/card_product", locals: {products: @products})
@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
     end
   end
 
-    def authenticate_user!
+  def authenticate_user!
     if user_signed_in?
       @user = current_user
     else
